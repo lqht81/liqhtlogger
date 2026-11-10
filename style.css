@@ -1,0 +1,369 @@
+/* ───────── Silinen mesajlar: kırmızı ───────── */
+/* Discord'un renk değişkenlerini sadece silinmiş mesajın içinde eziyoruz */
+.liqht-deleted {
+    --text-default: var(--status-danger, #f04747);
+    --interactive-icon-default: var(--status-danger, #f04747);
+    --text-muted: var(--status-danger, #f04747);
+    --embed-title: var(--red-460, #be3535);
+    --text-link: var(--red-460, #be3535);
+    --text-strong: var(--red-460, #be3535);
+}
+
+/* Silinmiş mesajda tepki/yanıtla/düzenle butonlarını gizle */
+.liqht-deleted [class*="buttonsInner"] [role="button"],
+.liqht-deleted [class*="buttonsInner"] [class*="separator"] {
+    display: none;
+}
+
+/* Silinmiş mesajdaki medya gri, üzerine gelince renkli */
+.liqht-deleted :is(.emoji,
+    [data-type="sticker"],
+    [class*="embedIframe"],
+    [class*="embedSpotify"],
+    [class*="imageContainer"]) {
+    filter: grayscale(1) !important;
+    transition: 150ms filter ease-in-out;
+
+    &:hover {
+        filter: grayscale(0) !important;
+    }
+}
+
+/* "🗑 Silindi · 01:42" etiketi — mesajın altında, metinle aynı hizada */
+.liqht-deleted[data-liqht-deleted]::after {
+    content: "🗑 " attr(data-liqht-deleted);
+    display: block;
+    padding: 0 0 4px var(--liqht-label-offset, 72px);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--status-danger, #f04747);
+}
+
+/* ───────── Ayarlar: Dosya Kaydetme Alanları ───────── */
+.liqht-areas {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    color: var(--text-default);
+}
+
+.liqht-areas-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--header-primary, var(--text-default));
+}
+
+.liqht-areas-desc {
+    font-size: 14px;
+    color: var(--text-muted);
+}
+
+.liqht-areas-row {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    cursor: pointer;
+}
+
+.liqht-areas input[type="checkbox"],
+.liqht-areas input[type="radio"] {
+    width: 18px;
+    height: 18px;
+    margin-top: 2px;
+    flex-shrink: 0;
+    accent-color: var(--brand-500, #5865f2);
+    cursor: pointer;
+}
+
+.liqht-areas-label {
+    font-weight: 500;
+    color: var(--header-primary, var(--text-default));
+}
+
+.liqht-areas-badge {
+    font-size: 11px;
+    padding: 1px 6px;
+    margin-left: 4px;
+    border-radius: 4px;
+    background: var(--brand-500, #5865f2);
+    color: #fff;
+}
+
+.liqht-areas-guilds {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-left: 28px;
+}
+
+.liqht-areas-radio,
+.liqht-areas-guild {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    cursor: pointer;
+}
+
+.liqht-areas-search {
+    padding: 8px 10px;
+    border-radius: 6px;
+    border: 1px solid var(--background-modifier-accent, #444);
+    background: var(--background-tertiary, #1e1f22);
+    color: var(--text-default);
+    outline: none;
+}
+
+.liqht-areas-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    max-height: 240px;
+    overflow-y: auto;
+    padding: 8px;
+    border-radius: 6px;
+    background: var(--background-secondary, #2b2d31);
+}
+
+/* Düzenlemeyle kaldırılan ekler: gri, üzerine gelince renkli */
+.liqht-deleted-attachment {
+    filter: grayscale(1) !important;
+    opacity: 0.7;
+    transition: 150ms filter ease-in-out, 150ms opacity ease-in-out;
+}
+
+.liqht-deleted-attachment:hover {
+    filter: grayscale(0) !important;
+    opacity: 1;
+}
+
+/* Gelen Kutusu yanındaki buton */
+.liqht-toolbar-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--interactive-normal, var(--icon-secondary, #b5bac1));
+}
+
+.liqht-toolbar-btn:hover {
+    color: var(--interactive-hover, var(--icon-primary, #dbdee1));
+}
+
+/* ───────── Panel ───────── */
+.liqht-p {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    color: var(--text-default);
+    padding-bottom: 8px;
+}
+
+.liqht-p-tabs,
+.liqht-p-filters,
+.liqht-p-actions,
+.liqht-p-file-row {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.liqht-p-tab {
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: none;
+    background: var(--background-secondary, #2b2d31);
+    color: var(--text-default);
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.liqht-p-tab.active {
+    background: var(--brand-500, #5865f2);
+    color: #fff;
+}
+
+.liqht-p-count {
+    margin-left: 4px;
+    padding: 0 6px;
+    border-radius: 8px;
+    background: rgb(0 0 0 / 25%);
+    font-size: 12px;
+}
+
+.liqht-p-filters select,
+.liqht-p-filters input {
+    flex: 1 1 160px;
+    min-width: 0;
+    padding: 7px 9px;
+    border-radius: 6px;
+    border: 1px solid var(--background-modifier-accent, #444);
+    background: var(--background-tertiary, #1e1f22);
+    color: var(--text-default);
+    outline: none;
+}
+
+.liqht-p-hidden {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    font-size: 13px;
+    color: var(--text-muted);
+    cursor: pointer;
+}
+
+.liqht-p-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    max-height: 60vh;
+    overflow-y: auto;
+    padding-right: 4px;
+}
+
+.liqht-p-day {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    padding: 6px 2px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    background: var(--modal-background, var(--background-primary, #313338));
+}
+
+.liqht-p-item {
+    display: flex;
+    gap: 12px;
+    padding: 10px;
+    border-radius: 8px;
+    background: var(--background-secondary, #2b2d31);
+    border-left: 3px solid var(--status-danger, #f04747);
+    margin-bottom: 6px;
+}
+
+.liqht-p-item.liqht-p-edit {
+    border-left-color: var(--status-warning, #f0b232);
+}
+
+.liqht-p-item.liqht-p-attachment {
+    border-left-color: var(--text-muted, #949ba4);
+}
+
+.liqht-p-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.liqht-p-body {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.liqht-p-head {
+    display: flex;
+    gap: 8px;
+    align-items: baseline;
+    flex-wrap: wrap;
+}
+
+.liqht-p-author {
+    font-weight: 600;
+    color: var(--header-primary, var(--text-default));
+}
+
+.liqht-p-where,
+.liqht-p-times,
+.liqht-p-muted {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+.liqht-p-tag {
+    font-size: 11px;
+    padding: 1px 6px;
+    border-radius: 4px;
+    background: var(--background-modifier-accent, #444);
+}
+
+.liqht-p-ghost {
+    background: var(--brand-500, #5865f2);
+    color: #fff;
+}
+
+.liqht-p-content,
+.liqht-p-old,
+.liqht-p-new {
+    word-break: break-word;
+    white-space: pre-wrap;
+}
+
+.liqht-p-old {
+    opacity: 0.55;
+    text-decoration: line-through;
+}
+
+.liqht-p-arrow {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+.liqht-p-files {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.liqht-p-media {
+    display: block;
+    max-width: 100%;
+    max-height: 320px;
+    border-radius: 6px;
+    margin-bottom: 4px;
+}
+
+.liqht-p-btn {
+    padding: 4px 10px;
+    border-radius: 4px;
+    border: none;
+    background: var(--background-modifier-accent, #4e5058);
+    color: var(--text-default);
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.liqht-p-btn:hover {
+    filter: brightness(1.15);
+}
+
+.liqht-p-danger {
+    background: var(--status-danger, #da373c);
+    color: #fff;
+}
+
+.liqht-p-more {
+    align-self: center;
+    margin: 8px 0;
+}
+
+.liqht-p-empty {
+    padding: 32px;
+    text-align: center;
+    color: var(--text-muted);
+}
+
+/* ───────── Düzenlenen mesajlar: normal renk, soluk ───────── */
+.liqht-edited {
+    opacity: 0.5;
+}
+
+.liqht-edited-time {
+    font-size: 11px;
+    font-style: italic;
+}
